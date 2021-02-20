@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<title>asdfx</title>
+		<style>
+			body {
+				font-family: monospace;
+			}
+		</style>
+	</head>
+	<body>
+    		<div style="margin-left:auto; margin-right:auto; width: 500px;">
+<pre>
+               _  __
+  __ _ ___  __| |/ _|_  __
+ / _` / __|/ _` | |_\ \/ /
+| (_| \__ \ (_| |  _|&gt;  &lt;
+ \__,_|___/\__,_|_| /_/\_\
+==========================
+</pre>
+			<p>Your IP address is</p>
+                        <h1 id="ip"></h1>
+
+			<table style="border: 1px solid #CCC; width: 100%;">
+				<tr>
+					<th>Organisation</th>
+					<td id="organisation"></td>
+				</tr>
+				<tr>
+					<th>City</th>
+					<td id="city"></td>
+				</tr>
+				<tr>
+					<th>Region</th>
+					<td id="region"></td>
+				</tr>
+				<tr>
+					<th>Country</th>
+					<td id="country"></td>
+				</tr>
+			</table>
+
+			<hr>
+
+ 
+	<p>
+		<a href="https://alexmills.uk">alexmills.uk</a>
+	</p>
+		</div>
+	</body>
+	<script>
+		function httpGetAsync(url, callback) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      callback(xmlHttp.responseText);
+  }
+  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.send(null);
+}
+
+var url = "https://ipgeolocation.abstractapi.com/v1/?api_key=4efddbe3eb0a467f88bc18ead50bd098"
+
+httpGetAsync(url, function(data) {
+json = JSON.parse(data)
+element = document.getElementById('ip');
+element.innerHTML = json.ip_address;
+element = document.getElementById('city');
+element.innerHTML = json.city;
+element = document.getElementById('region');
+element.innerHTML = json.region;
+element = document.getElementById('country');
+element.innerHTML = json.country;
+element = document.getElementById('organisation');
+element.innerHTML = json.connection.autonomous_system_organization;
+})
+
+	</script>
+</html>
